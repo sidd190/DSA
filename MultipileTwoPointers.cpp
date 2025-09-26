@@ -62,6 +62,41 @@ using namespace std;
 //     return count;
 // }
 
+bool checkInclusion(string s1, string s2) {
+        int n = s2.length();
+        unordered_map<char, int> teller2;
+        unordered_map<char, int> teller1;
+        if(n< s1.length()) return false;
+
+        for(int i = 0; i<s1.length(); i++){
+            teller1[s1[i]]++;
+        }
+
+        for(int i =0; i<n; i++){
+            if(teller1.count(s2[i])){
+                if (i + s1.length() > n) break;
+                for(int j = i; j< i+ s1.length(); j++){
+                    teller2[s2[j]]++;
+                }
+                if(teller1 ==  teller2){
+                    return true;
+                }
+                teller2.clear();                
+            }
+        }
+
+        for(auto x:teller1)
+        {
+            cout<<x.first<<" "<<x.second;cout<<"\n";
+        }
+
+        for(auto x:teller2)
+        {
+            cout<<x.first<<" "<<x.second;cout<<"\n";
+        }
+        return false;
+}
+
 int main() {
     // mergeAlternately("abcd","efghij");
     // vector<int> nums1 = {1,2,3,0,0,0,0};
@@ -70,5 +105,8 @@ int main() {
     // int n = 3;
     // MergeSortedArray(nums1, m, nums2, n);
     // numRescueBoats(nums2,3);
+
+    checkInclusion("ab", "aosjfasakbjfow");
+
     return 0;
 }
